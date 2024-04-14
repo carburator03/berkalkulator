@@ -13,7 +13,7 @@ const HouseholdSalaryCalculator = () => {
     <>
       <div className='flex gap-5 justify-center'>
         <FamilyMemberTabs members={members} setMembers={setMembers} />
-        <div onClick={() => setMembers([...members, ''])}>
+        <div onClick={() => setMembers([...members, { name: 'Családtag', salary: '' }])}>
           <Button size='icon'>
             <Plus className='h-4 w-4' />
           </Button>
