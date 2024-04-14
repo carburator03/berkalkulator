@@ -6,8 +6,8 @@ import { useState } from 'react';
 
 const HouseholdSalaryCalculator = () => {
   const [members, setMembers] = useState([
-    { name: 'Peti', earning: 300000 },
-    { name: 'Jani', earning: null },
+    { name: 'Peti', salary: 300000 },
+    { name: 'Jani', salary: '' },
   ]);
   return (
     <>

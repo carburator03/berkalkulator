@@ -1,6 +1,7 @@
 import { Input } from '@/components/ui/input';
-import { Slider } from '../ui/slider';
-import { Label } from '@radix-ui/react-label';
+import { Slider } from '@/components/ui/slider';
+import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
 
 const SalaryCalculator = ({ member, members, setMembers, index }) => {
   const handleNameChange = e => {
@@ -8,18 +9,23 @@ const SalaryCalculator = ({ member, members, setMembers, index }) => {
     setMembers([...members.slice(0, index), member, ...members.slice(index + 1)]);
   };
 
-  const handleEarningChange = e => {
-    const earning = parseInt(e.target.value);
-    if (!isNaN(earning) && earning >= 10000 && earning <= 2000000) {
-      member.earning = earning;
+  const handleSalaryChange = e => {
+    const salary = parseInt(e.target.value) || '';
+    if (!isNaN(salary) && salary >= 0 && salary <= 2000000) {
+      member.salary = salary;
       setMembers([...members.slice(0, index), member, ...members.slice(index + 1)]);
     }
   };
 
-  const handleEarningChangeSlider = value => {
-    member.earning = value[0];
+  const handleSalaryChangeSlider = value => {
+    member.salary = value[0];
     setMembers([...members.slice(0, index), member, ...members.slice(index + 1)]);
-    document.getElementById('earning').value = value[0];
+  };
+
+  const handleSalaryChangeButton = percent => {
+    member.salary = parseInt(member.salary * percent);
+    if (member.salary > 2000000) member.salary = 2000000;
+    setMembers([...members.slice(0, index), member, ...members.slice(index + 1)]);
   };
 
   return (
@@ -32,21 +38,29 @@ const SalaryCalculator = ({ member, members, setMembers, index }) => {
         onChange={handleNameChange}
         id='name'
       />
-      <Label htmlFor='earning'>Fizetése</Label>
+      <Label htmlFor='salary'>Fizetése</Label>
       <Input
         type='text'
         placeholder='250000'
-        defaultValue={member.earning}
-        onChange={handleEarningChange}
-        id='earning'
+        value={member.salary}
+        onChange={e => {
+          handleSalaryChange(e);
+        }}
+        id='salary'
       />
       <Slider
-        defaultValue={[member.earning]}
+        value={[member.salary]}
         max={2000000}
-        min={10000}
+        min={0}
         step={1000}
-        onValueChange={handleEarningChangeSlider}
+        onValueChange={handleSalaryChangeSlider}
       />
+      <div className='flex gap-5'>
+        <Button onClick={() => handleSalaryChangeButton(0.95)}>-5%</Button>
+        <Button onClick={() => handleSalaryChangeButton(0.99)}>-1%</Button>
+        <Button onClick={() => handleSalaryChangeButton(1.01)}>+1%</Button>
+        <Button onClick={() => handleSalaryChangeButton(1.05)}>+5%</Button>
+      </div>
     </div>
   );
 };
