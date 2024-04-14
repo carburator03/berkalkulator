@@ -1,5 +1,5 @@
 const SalaryCalculator = () => {
-  return <div></div>;
+  return <div className='bg-pink-400'></div>;
 };
 
 export default SalaryCalculator;
