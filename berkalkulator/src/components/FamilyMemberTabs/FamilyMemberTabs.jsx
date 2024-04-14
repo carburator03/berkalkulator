@@ -13,7 +13,7 @@ const FamilyMemberTabs = ({ members, setMembers }) => {
           ))}
         </TabsList>
         {members.map((member, index) => (
-          <TabsContent value={index}>
+          <TabsContent value={index} key={index}>
             <SalaryCalculator
               member={member}
               members={members}

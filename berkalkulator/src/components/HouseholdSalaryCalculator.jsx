@@ -5,7 +5,10 @@ import { Plus } from 'lucide-react';
 import { useState } from 'react';
 
 const HouseholdSalaryCalculator = () => {
-  const [members, setMembers] = useState([{ name: 'Peti' }, { name: 'Jani' }]);
+  const [members, setMembers] = useState([
+    { name: 'Peti', earning: 300000 },
+    { name: 'Jani', earning: null },
+  ]);
   return (
     <>
       <div className='flex gap-5 justify-center'>
