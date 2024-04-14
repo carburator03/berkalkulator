@@ -2,25 +2,21 @@ import FamilyMemberTabs from './FamilyMemberTabs/FamilyMemberTabs';
 import HouseholdSummary from './HouseholdSummary/HouseholdSummary';
 import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
-import { createContext, useState } from 'react';
-
-export const memberContext = createContext();
+import { useState } from 'react';
 
 const HouseholdSalaryCalculator = () => {
-  const [members, setMembers] = useState(['Feri', 'Laci']);
+  const [members, setMembers] = useState([{ name: 'Peti' }, { name: 'Jani' }]);
   return (
     <>
-      <memberContext.Provider value={members}>
-        <div className='flex gap-5 justify-center'>
-          <FamilyMemberTabs />
-          <div onClick={() => setMembers([...members, ''])}>
-            <Button size='icon'>
-              <Plus className='h-4 w-4' />
-            </Button>
-          </div>
+      <div className='flex gap-5 justify-center'>
+        <FamilyMemberTabs members={members} setMembers={setMembers} />
+        <div onClick={() => setMembers([...members, ''])}>
+          <Button size='icon'>
+            <Plus className='h-4 w-4' />
+          </Button>
         </div>
-        <HouseholdSummary />
-      </memberContext.Provider>
+      </div>
+      <HouseholdSummary />
     </>
   );
 };

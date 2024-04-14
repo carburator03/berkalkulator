@@ -1,21 +1,26 @@
 import SalaryCalculator from '../SalaryCalculator/SalaryCalculator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { useContext } from 'react';
-import { memberContext } from '../HouseholdSalaryCalculator';
 
-const FamilyMemberTabs = () => {
-  const members = useContext(memberContext);
+const FamilyMemberTabs = ({ members, setMembers }) => {
   return (
     <div>
-      <Tabs defaultValue={members[0]} className=''>
+      <Tabs defaultValue={0} className=''>
         <TabsList>
-          {members.map(member => (
-            <TabsTrigger value={member}>{member}</TabsTrigger>
+          {members.map((member, index) => (
+            <TabsTrigger value={index} key={index}>
+              {member.name}
+            </TabsTrigger>
           ))}
         </TabsList>
-        {members.map(member => (
-          <TabsContent value={member}>
-            <SalaryCalculator />
+        {members.map((member, index) => (
+          <TabsContent value={index}>
+            <SalaryCalculator
+              member={member}
+              members={members}
+              setMembers={setMembers}
+              key={index}
+              index={index}
+            />
           </TabsContent>
         ))}
       </Tabs>
