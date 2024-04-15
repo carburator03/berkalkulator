@@ -4,9 +4,12 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import { Trash2 } from 'lucide-react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { MarriedDateDialog } from '../MarriedDateDialog/MarriedDateDialog';
 
 const SalaryCalculator = ({ member, members, setMembers, index }) => {
+  const [marriedBenefit, setMarriedBenefit] = useState(false);
+
   useEffect(() => {
     updateMembers();
   }, []);
@@ -125,6 +128,10 @@ const SalaryCalculator = ({ member, members, setMembers, index }) => {
           <div className='flex items-center space-x-2'>
             <Switch id='hazasok' checked={member.married} onCheckedChange={handleMarriedSwitch} />
             <Label htmlFor='hazasok'>Friss házasok kedvezménye</Label>
+            <MarriedDateDialog
+              marriedBenefit={marriedBenefit}
+              setMarriedBenefit={setMarriedBenefit}
+            />
           </div>
           <div className='flex items-center space-x-2'>
             <Switch
