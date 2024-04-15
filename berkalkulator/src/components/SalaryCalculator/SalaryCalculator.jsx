@@ -2,6 +2,7 @@ import { Input } from '@/components/ui/input';
 import { Slider } from '@/components/ui/slider';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
+import { Switch } from '@/components/ui/switch';
 
 const SalaryCalculator = ({ member, members, setMembers, index }) => {
   const handleNameChange = e => {
@@ -60,6 +61,25 @@ const SalaryCalculator = ({ member, members, setMembers, index }) => {
         <Button onClick={() => handleSalaryChangeButton(0.99)}>-1%</Button>
         <Button onClick={() => handleSalaryChangeButton(1.01)}>+1%</Button>
         <Button onClick={() => handleSalaryChangeButton(1.05)}>+5%</Button>
+      </div>
+      <h2>KEDVEZMÉNYEK</h2>
+      <div>
+        <div className='flex items-center space-x-2'>
+          <Switch id='szja' />
+          <Label htmlFor='szja'>25 év alattiak SZJA mentessége</Label>
+        </div>
+        <div className='flex items-center space-x-2'>
+          <Switch id='hazasok' />
+          <Label htmlFor='hazasok'>Friss házasok kedvezménye</Label>
+        </div>
+        <div className='flex items-center space-x-2'>
+          <Switch id='szemelyi' />
+          <Label htmlFor='szemelyi'>Személyi adókedvezmény</Label>
+        </div>
+        <div className='flex items-center space-x-2'>
+          <Switch id='csaladi' />
+          <Label htmlFor='csaladi'>Családi kedvezmény</Label>
+        </div>
       </div>
     </div>
   );
