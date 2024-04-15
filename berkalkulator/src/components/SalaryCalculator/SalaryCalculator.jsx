@@ -6,32 +6,56 @@ import { Switch } from '@/components/ui/switch';
 import { Trash2 } from 'lucide-react';
 
 const SalaryCalculator = ({ member, members, setMembers, index }) => {
+  const updateMembers = () => {
+    setMembers([...members.slice(0, index), member, ...members.slice(index + 1)]);
+  };
+
   const handleNameChange = e => {
     member.name = e.target.value;
-    setMembers([...members.slice(0, index), member, ...members.slice(index + 1)]);
+    updateMembers();
   };
 
   const handleSalaryChange = e => {
     const salary = parseInt(e.target.value) || '';
     if (!isNaN(salary) && salary >= 0 && salary <= 2000000) {
       member.salary = salary;
-      setMembers([...members.slice(0, index), member, ...members.slice(index + 1)]);
+      updateMembers();
     }
   };
 
   const handleSalaryChangeSlider = value => {
     member.salary = value[0];
-    setMembers([...members.slice(0, index), member, ...members.slice(index + 1)]);
+    updateMembers();
   };
 
   const handleSalaryChangeButton = percent => {
     member.salary = parseInt(member.salary * percent);
     if (member.salary > 2000000) member.salary = 2000000;
-    setMembers([...members.slice(0, index), member, ...members.slice(index + 1)]);
+    updateMembers();
   };
 
   const deleteMember = () => {
     setMembers([...members.slice(0, index), ...members.slice(index + 1)]);
+  };
+
+  const handleYoungSwitch = e => {
+    member.young = e;
+    updateMembers();
+  };
+
+  const handleMarriedSwitch = e => {
+    member.married = e;
+    updateMembers();
+  };
+
+  const handlePersonnelSwitch = e => {
+    member.personnel = e;
+    updateMembers();
+  };
+
+  const handleFamilySwitch = e => {
+    member.family = e;
+    updateMembers();
   };
 
   return (
@@ -79,19 +103,23 @@ const SalaryCalculator = ({ member, members, setMembers, index }) => {
         <h2>KEDVEZMÉNYEK</h2>
         <div>
           <div className='flex items-center space-x-2'>
-            <Switch id='szja' />
+            <Switch id='szja' checked={member.young} onCheckedChange={handleYoungSwitch} />
             <Label htmlFor='szja'>25 év alattiak SZJA mentessége</Label>
           </div>
           <div className='flex items-center space-x-2'>
-            <Switch id='hazasok' />
+            <Switch id='hazasok' checked={member.married} onCheckedChange={handleMarriedSwitch} />
             <Label htmlFor='hazasok'>Friss házasok kedvezménye</Label>
           </div>
           <div className='flex items-center space-x-2'>
-            <Switch id='szemelyi' />
+            <Switch
+              id='szemelyi'
+              checked={member.personnel}
+              onCheckedChange={handlePersonnelSwitch}
+            />
             <Label htmlFor='szemelyi'>Személyi adókedvezmény</Label>
           </div>
           <div className='flex items-center space-x-2'>
-            <Switch id='csaladi' />
+            <Switch id='csaladi' checked={member.family} onCheckedChange={handleFamilySwitch} />
             <Label htmlFor='csaladi'>Családi kedvezmény</Label>
           </div>
         </div>
