@@ -4,9 +4,25 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import { Trash2 } from 'lucide-react';
+import { useEffect } from 'react';
 
 const SalaryCalculator = ({ member, members, setMembers, index }) => {
+  useEffect(() => {
+    updateMembers();
+  }, []);
+
+  const updateNetSalary = () => {
+    let tax = 0;
+    tax += member.salary * 0.185;
+    if (!member.young) tax += member.salary * 0.15;
+    if (member.young && member.salary > 499952) tax += (member.salary - 499952) * 0.15;
+    if (member.personnel) tax < 77300 ? (tax = 0) : (tax -= 77300);
+    console.log(tax);
+    member.net = member.salary - parseInt(tax);
+  };
+
   const updateMembers = () => {
+    updateNetSalary();
     setMembers([...members.slice(0, index), member, ...members.slice(index + 1)]);
   };
 

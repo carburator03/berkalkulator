@@ -8,7 +8,7 @@ const HouseholdSalaryCalculator = () => {
   const [members, setMembers] = useState([
     {
       name: 'Peti',
-      salary: 300000,
+      salary: 100000,
       young: false,
       married: false,
       personnel: false,
