@@ -6,6 +6,7 @@ import { Switch } from '@/components/ui/switch';
 import { Trash2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { MarriedDateDialog } from '../MarriedDateDialog/MarriedDateDialog';
+import { Badge } from '@/components/ui/badge';
 
 const SalaryCalculator = ({ member, members, setMembers, index }) => {
   const [marriedBenefit, setMarriedBenefit] = useState(false);
@@ -128,10 +129,18 @@ const SalaryCalculator = ({ member, members, setMembers, index }) => {
           <div className='flex items-center space-x-2'>
             <Switch id='hazasok' checked={member.married} onCheckedChange={handleMarriedSwitch} />
             <Label htmlFor='hazasok'>Friss házasok kedvezménye</Label>
-            <MarriedDateDialog
-              marriedBenefit={marriedBenefit}
-              setMarriedBenefit={setMarriedBenefit}
-            />
+            {member.married && (
+              <MarriedDateDialog
+                marriedBenefit={marriedBenefit}
+                setMarriedBenefit={setMarriedBenefit}
+              />
+            )}
+            {member.married && marriedBenefit && (
+              <Badge className='cursor-default bg-green-800'>Jogosult</Badge>
+            )}
+            {member.married && !marriedBenefit && (
+              <Badge className='cursor-default bg-red-800'>Nem jogosult</Badge>
+            )}
           </div>
           <div className='flex items-center space-x-2'>
             <Switch

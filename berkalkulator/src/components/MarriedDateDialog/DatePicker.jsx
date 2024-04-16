@@ -11,6 +11,12 @@ import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 
 export function DatePicker({ date, setDate }) {
+  const disabledDays = [
+    {
+      after: new Date(),
+    },
+  ];
+
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -26,7 +32,14 @@ export function DatePicker({ date, setDate }) {
         </Button>
       </PopoverTrigger>
       <PopoverContent className='w-auto p-0'>
-        <Calendar mode='single' selected={date} onSelect={setDate} initialFocus locale={hu} />
+        <Calendar
+          mode='single'
+          selected={date}
+          onSelect={setDate}
+          initialFocus
+          locale={hu}
+          disabled={disabledDays}
+        />
       </PopoverContent>
     </Popover>
   );

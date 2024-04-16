@@ -14,10 +14,15 @@ import { DatePicker } from './DatePicker';
 import { useState, useEffect } from 'react';
 
 export function MarriedDateDialog({ marriedBenefit, setMarriedBenefit }) {
-  const [date, setDate] = useState();
+  const [date, setDate] = useState(new Date());
 
   useEffect(() => {
-    console.log(date, '- Has changed');
+    const today = new Date();
+    const nextMonth = new Date(date);
+    nextMonth.setMonth(nextMonth.getMonth() + 1);
+    const diff = Math.floor((today - nextMonth) / (1000 * 60 * 60 * 24));
+    if (diff > 0 && diff <= 730) setMarriedBenefit(true);
+    else setMarriedBenefit(false);
   }, [date]);
 
   return (
@@ -40,7 +45,7 @@ export function MarriedDateDialog({ marriedBenefit, setMarriedBenefit }) {
         <DialogFooter className='sm:justify-start'>
           <DialogClose asChild>
             <Button type='button' variant='secondary'>
-              Close
+              Bezárás
             </Button>
           </DialogClose>
         </DialogFooter>
