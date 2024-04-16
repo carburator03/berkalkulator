@@ -9,7 +9,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { Badge } from '@/components/ui/badge';
 import { DatePicker } from './DatePicker';
 import { useState, useEffect } from 'react';
 
@@ -28,7 +27,7 @@ export function MarriedDateDialog({ marriedBenefit, setMarriedBenefit }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Badge className='cursor-pointer'>Dátum</Badge>
+        <Button className='h-6'>Dátum</Button>
       </DialogTrigger>
       <DialogContent className='sm:max-w-md'>
         <DialogHeader>
