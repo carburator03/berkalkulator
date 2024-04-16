@@ -13,6 +13,8 @@ const HouseholdSalaryCalculator = () => {
       married: false,
       personnel: false,
       family: true,
+      dependent: 1,
+      dependent2: 0,
       net: 0,
     },
     {
@@ -22,6 +24,8 @@ const HouseholdSalaryCalculator = () => {
       married: true,
       personnel: false,
       family: true,
+      dependent: 2,
+      dependent2: 1,
       net: 0,
     },
   ]);
@@ -40,6 +44,8 @@ const HouseholdSalaryCalculator = () => {
                 married: false,
                 personnel: false,
                 family: false,
+                dependent: 1,
+                dependent2: 0,
                 net: 0,
               },
             ])

@@ -3,7 +3,7 @@ import { Slider } from '@/components/ui/slider';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
-import { Trash2 } from 'lucide-react';
+import { Trash2, Plus, Minus } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { MarriedDateDialog } from '../MarriedDateDialog/MarriedDateDialog';
 import { Badge } from '@/components/ui/badge';
@@ -21,8 +21,10 @@ const SalaryCalculator = ({ member, members, setMembers, index }) => {
     if (!member.young) tax += member.salary * 0.15;
     if (member.young && member.salary > 499952) tax += (member.salary - 499952) * 0.15;
     if (member.personnel) tax < 77300 ? (tax = 0) : (tax -= 77300);
+    // dependent calculation
     console.log(tax);
     member.net = member.salary - parseInt(tax);
+    if (member.married && marriedBenefit) member.net += 5000;
   };
 
   const updateMembers = () => {
@@ -75,6 +77,20 @@ const SalaryCalculator = ({ member, members, setMembers, index }) => {
 
   const handleFamilySwitch = e => {
     member.family = e;
+    updateMembers();
+  };
+
+  const handleDependentChange = value => {
+    member.dependent += value;
+    if (member.dependent < 1) member.dependent = 1;
+    updateMembers();
+  };
+
+  const handleDependent2Change = value => {
+    member.dependent2 += value;
+    if (member.dependent2 < 0) member.dependent2 = 0;
+    if (member.dependent2 > member.dependent) member.dependent2 = member.dependent;
+    if (member.dependent2 > 3) member.dependent2 = 3;
     updateMembers();
   };
 
@@ -153,6 +169,23 @@ const SalaryCalculator = ({ member, members, setMembers, index }) => {
           <div className='flex items-center space-x-2'>
             <Switch id='csaladi' checked={member.family} onCheckedChange={handleFamilySwitch} />
             <Label htmlFor='csaladi'>Családi kedvezmény</Label>
+          </div>
+          <div className='flex'>
+            <Button onClick={() => handleDependentChange(-1)}>
+              <Minus />
+            </Button>
+            <p>{member.dependent}</p>
+            <Button onClick={() => handleDependentChange(1)}>
+              <Plus />
+            </Button>
+            <p>eltartott, ebből kedvezményezett: </p>
+            <Button onClick={() => handleDependent2Change(-1)}>
+              <Minus />
+            </Button>
+            <p>{member.dependent2}</p>
+            <Button onClick={() => handleDependent2Change(1)}>
+              <Plus />
+            </Button>
           </div>
         </div>
       </div>
