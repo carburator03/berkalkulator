@@ -31,32 +31,34 @@ const HouseholdSalaryCalculator = () => {
   ]);
   return (
     <>
-      <div className='flex gap-5 justify-center'>
-        <FamilyMemberTabs members={members} setMembers={setMembers} />
-        <div
-          onClick={() =>
-            setMembers([
-              ...members,
-              {
-                name: 'Családtag',
-                salary: '',
-                young: false,
-                married: false,
-                personnel: false,
-                family: false,
-                dependent: 1,
-                dependent2: 0,
-                net: 0,
-              },
-            ])
-          }
-        >
-          <Button size='icon'>
-            <Plus className='h-4 w-4' />
+      <div className='flex justify-center w-5/6 m-auto gap-10'>
+        <div className='flex gap-5 justify-center flex-1 border-4'>
+          <FamilyMemberTabs members={members} setMembers={setMembers} />
+          <Button
+            size='icon'
+            onClick={() =>
+              setMembers([
+                ...members,
+                {
+                  name: 'Családtag',
+                  salary: '',
+                  young: false,
+                  married: false,
+                  personnel: false,
+                  family: false,
+                  dependent: 1,
+                  dependent2: 0,
+                  net: 0,
+                },
+              ])
+            }
+            className='-ml-20'
+          >
+            <Plus />
           </Button>
         </div>
+        <HouseholdSummary members={members} />
       </div>
-      <HouseholdSummary />
     </>
   );
 };
