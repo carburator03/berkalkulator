@@ -73,6 +73,10 @@ module.exports = {
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
     },
+    fontFamily: {
+      courier: ['Courier Prime', 'monospace'],
+      ubuntu: ['Ubuntu', 'sans-serif'],
+    },
   },
   plugins: [require('tailwindcss-animate')],
 };

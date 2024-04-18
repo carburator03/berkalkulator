@@ -35,6 +35,8 @@
     --radius: 1rem;
 
     --cardBg: 192, 23%, 86%;
+
+    font-family: Ubuntu, sans-serif;
   }
 }
 
@@ -45,4 +47,8 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.h1-title {
+  font-family: 'Courier Prime', monospace;
 }

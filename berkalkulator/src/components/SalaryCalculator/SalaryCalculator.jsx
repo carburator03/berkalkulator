@@ -101,7 +101,7 @@ const SalaryCalculator = ({ member, members, setMembers, index }) => {
           <h1 className='font-bold text-2xl'>
             <span className='uppercase'>{member.name}</span> BÉRÉNEK KISZÁMÍTÁSA
           </h1>
-          <Button size='icon' variant='destructive' onClick={deleteMember}>
+          <Button size='icon' variant='destructive' onClick={deleteMember} className='ml-2'>
             <Trash2 className='h-4 w-4' />
           </Button>
         </div>
@@ -139,7 +139,7 @@ const SalaryCalculator = ({ member, members, setMembers, index }) => {
           <Button onClick={() => handleSalaryChangeButton(1.01)}>+1%</Button>
           <Button onClick={() => handleSalaryChangeButton(1.05)}>+5%</Button>
         </div>
-        <h2 className='text-lg font-bold'>KEDVEZMÉNYEK</h2>
+        <h2 className='text-lg font-bold my-3'>KEDVEZMÉNYEK</h2>
         <div className='space-y-2'>
           <div className='flex items-center space-x-2'>
             <Switch id='szja' checked={member.young} onCheckedChange={handleYoungSwitch} />
@@ -173,29 +173,40 @@ const SalaryCalculator = ({ member, members, setMembers, index }) => {
             <Switch id='csaladi' checked={member.family} onCheckedChange={handleFamilySwitch} />
             <Label htmlFor='csaladi'>Családi kedvezmény</Label>
           </div>
-          <div className='flex'>
-            <Button onClick={() => handleDependentChange(-1)} className='w-6 h-6 p-0 rounded-full'>
-              <Minus className='size-5' />
-            </Button>
-            <p className='mx-2'>{member.dependent}</p>
-            <Button onClick={() => handleDependentChange(1)} className='w-6 h-6 p-0 rounded-full'>
-              <Plus className='size-5' />
-            </Button>
-            <p className='mx-2'>eltartott, ebből kedvezményezett: </p>
-            <Button onClick={() => handleDependent2Change(-1)} className='w-6 h-6 p-0 rounded-full'>
-              <Minus className='size-5' />
-            </Button>
-            <p className='mx-2'>{member.dependent2}</p>
-            <Button onClick={() => handleDependent2Change(1)} className='w-6 h-6 p-0 rounded-full'>
-              <Plus className='size-5' />
-            </Button>
-          </div>
+          {member.family && (
+            <div className='flex'>
+              <Button
+                onClick={() => handleDependentChange(-1)}
+                className='w-6 h-6 p-0 rounded-full'
+              >
+                <Minus className='size-5' />
+              </Button>
+              <p className='mx-2'>{member.dependent}</p>
+              <Button onClick={() => handleDependentChange(1)} className='w-6 h-6 p-0 rounded-full'>
+                <Plus className='size-5' />
+              </Button>
+              <p className='mx-2'>eltartott, ebből kedvezményezett: </p>
+              <Button
+                onClick={() => handleDependent2Change(-1)}
+                className='w-6 h-6 p-0 rounded-full'
+              >
+                <Minus className='size-5' />
+              </Button>
+              <p className='mx-2'>{member.dependent2}</p>
+              <Button
+                onClick={() => handleDependent2Change(1)}
+                className='w-6 h-6 p-0 rounded-full'
+              >
+                <Plus className='size-5' />
+              </Button>
+            </div>
+          )}
         </div>
       </div>
       <div className='bg-secondary w-fit mx-auto p-5 text-center rounded-lg border-4 text-lg font-bold'>
         <p className='text-border '>NETTÓ BÉR:</p>
         <div>
-          <p>{member.net}</p>
+          <p>{member.net} Ft</p>
         </div>
       </div>
     </div>
