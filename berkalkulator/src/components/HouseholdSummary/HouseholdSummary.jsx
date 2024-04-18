@@ -27,7 +27,11 @@ const HouseholdSummary = ({ members }) => {
             return (
               <TableRow key={index} className={classToApply}>
                 <TableCell>{member.name}</TableCell>
-                <TableCell>{member.net} Ft</TableCell>
+                <TableCell>
+                  {new Intl.NumberFormat('hu-HU', { style: 'currency', currency: 'HUF' }).format(
+                    member.net,
+                  )}
+                </TableCell>
                 <TableCell className={'flex justify-end gap-1'}>
                   {member.young ? (
                     <Badge variant='secondary' className='border-2 border-primary'>
@@ -63,7 +67,11 @@ const HouseholdSummary = ({ members }) => {
           })}
           <TableRow className='font-bold'>
             <TableCell>Összesen</TableCell>
-            <TableCell>{members.reduce((acc, member) => acc + member.net, 0)} Ft</TableCell>
+            <TableCell>
+              {new Intl.NumberFormat('hu-HU', { style: 'currency', currency: 'HUF' }).format(
+                members.reduce((acc, member) => acc + member.net, 0),
+              )}
+            </TableCell>
             <TableCell></TableCell>
           </TableRow>
         </TableBody>

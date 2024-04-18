@@ -206,7 +206,11 @@ const SalaryCalculator = ({ member, members, setMembers, index }) => {
       <div className='bg-secondary w-fit mx-auto p-5 text-center rounded-lg border-4 text-lg font-bold'>
         <p className='text-border '>NETTÓ BÉR:</p>
         <div>
-          <p>{member.net} Ft</p>
+          <p>
+            {new Intl.NumberFormat('hu-HU', { style: 'currency', currency: 'HUF' }).format(
+              member.net,
+            )}
+          </p>
         </div>
       </div>
     </div>
