@@ -27,6 +27,8 @@ const FamilyMemberTabs = ({ members, setMembers }) => {
                   salary: '',
                   young: false,
                   married: false,
+                  marriedBenefit: false,
+                  marriedDate: new Date(),
                   personnel: false,
                   family: false,
                   dependent: 1,

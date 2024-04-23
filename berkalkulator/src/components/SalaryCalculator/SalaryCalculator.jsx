@@ -9,11 +9,13 @@ import { MarriedDateDialog } from '../MarriedDateDialog/MarriedDateDialog';
 import { Badge } from '@/components/ui/badge';
 
 const SalaryCalculator = ({ member, members, setMembers, index }) => {
-  const [marriedBenefit, setMarriedBenefit] = useState(false);
+  const [marriedBenefit, setMarriedBenefit] = useState(member.marriedBenefit);
+  console.log(member.married, 'hazas e', member.name);
+  console.log(marriedBenefit, 'kedvezmeny', member.name);
 
   useEffect(() => {
     updateMembers();
-  }, []);
+  }, [member.marriedDate]);
 
   const updateNetSalary = () => {
     let tax = 0;
@@ -21,17 +23,18 @@ const SalaryCalculator = ({ member, members, setMembers, index }) => {
     if (!member.young) tax += member.salary * 0.15;
     if (member.young && member.salary > 499952) tax += (member.salary - 499952) * 0.15;
     if (member.personnel) tax < 77300 ? (tax = 0) : (tax -= 77300);
-    // dependent calculation
-    switch (member.dependent2) {
-      case 1:
-        tax -= member.dependent * 10000;
-        break;
-      case 2:
-        tax -= member.dependent * 20000;
-        break;
-      case 3:
-        tax -= member.dependent * 33000;
-        break;
+    if (member.family) {
+      switch (member.dependent2) {
+        case 1:
+          tax -= member.dependent * 10000;
+          break;
+        case 2:
+          tax -= member.dependent * 20000;
+          break;
+        case 3:
+          tax -= member.dependent * 33000;
+          break;
+      }
     }
     member.net = member.salary - parseInt(tax);
     if (member.net < 0) member.net = 0;
@@ -164,6 +167,7 @@ const SalaryCalculator = ({ member, members, setMembers, index }) => {
               <MarriedDateDialog
                 marriedBenefit={marriedBenefit}
                 setMarriedBenefit={setMarriedBenefit}
+                member={member}
               />
             )}
             {member.married && marriedBenefit && (

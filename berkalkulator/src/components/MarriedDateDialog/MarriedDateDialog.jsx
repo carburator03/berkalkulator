@@ -12,8 +12,8 @@ import {
 import { DatePicker } from './DatePicker';
 import { useState, useEffect } from 'react';
 
-export function MarriedDateDialog({ marriedBenefit, setMarriedBenefit }) {
-  const [date, setDate] = useState(new Date());
+export function MarriedDateDialog({ marriedBenefit, setMarriedBenefit, member }) {
+  const [date, setDate] = useState(member.marriedDte);
 
   useEffect(() => {
     const today = new Date();
@@ -22,6 +22,8 @@ export function MarriedDateDialog({ marriedBenefit, setMarriedBenefit }) {
     const diff = Math.floor((today - nextMonth) / (1000 * 60 * 60 * 24));
     if (diff > 0 && diff <= 730) setMarriedBenefit(true);
     else setMarriedBenefit(false);
+    member.marriedBenefit = marriedBenefit;
+    member.marriedDate = date;
   }, [date]);
 
   return (
