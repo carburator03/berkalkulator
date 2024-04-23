@@ -22,8 +22,20 @@ const SalaryCalculator = ({ member, members, setMembers, index }) => {
     if (member.young && member.salary > 499952) tax += (member.salary - 499952) * 0.15;
     if (member.personnel) tax < 77300 ? (tax = 0) : (tax -= 77300);
     // dependent calculation
-    console.log(tax);
+    switch (member.dependent2) {
+      case 1:
+        tax -= member.dependent * 10000;
+        break;
+      case 2:
+        tax -= member.dependent * 20000;
+        break;
+      case 3:
+        tax -= member.dependent * 33000;
+        break;
+    }
     member.net = member.salary - parseInt(tax);
+    if (member.net < 0) member.net = 0;
+    if (member.net > member.salary) member.net = member.salary;
     if (member.married && marriedBenefit) member.net += 5000;
   };
 
