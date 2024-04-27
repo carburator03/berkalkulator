@@ -23,7 +23,7 @@ const HouseholdSalaryCalculator = () => {
           },
           {
             name: 'Jani',
-            salary: '550000',
+            salary: '800000',
             young: false,
             married: true,
             marriedBenefit: false,

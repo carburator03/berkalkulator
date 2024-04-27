@@ -10,8 +10,6 @@ import { Badge } from '@/components/ui/badge';
 
 const SalaryCalculator = ({ member, members, setMembers, index }) => {
   const [marriedBenefit, setMarriedBenefit] = useState(member.marriedBenefit);
-  console.log(member.married, 'hazas e', member.name);
-  console.log(marriedBenefit, 'kedvezmeny', member.name);
 
   useEffect(() => {
     updateMembers();
