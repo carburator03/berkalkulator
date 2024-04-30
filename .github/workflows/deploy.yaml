@@ -37,7 +37,7 @@ jobs:
           cache: 'npm'
           cache-dependency-path: berkalkulator/package-lock.json
       - name: Install dependencies
-        run: npm ci
+        run: cd ./berkalkulator ; npm ci
       - name: Build
         run: pm run build
       - name: Setup Pages
