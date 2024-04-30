@@ -36,8 +36,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
-          path: './berkalkulator'
+          cache: 'cd berkalkulator ; npm'
       - name: Install dependencies
         run: cd ./berkalkulator ; npm ci
       - name: Build
